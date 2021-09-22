@@ -1,18 +1,11 @@
-def print_hello():
-    """This function prints hello."""
-    print("hello!")
+def add_three_numbers(x, y, z):
+    average_three = (x + y + z) / 3
+    result = (average_three)
+    return (result)
 
 
-def goodbye():
-    print("Goodbye!")
 
 
-def main():
-    print_hello()
-    goodbye()
-
-
-if __name__ == "__main__":
-    main()
-
+my_result = add_three_numbers(10, 20, 30)
+print(my_result)
 

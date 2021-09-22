@@ -9,10 +9,10 @@ arcade.start_render()
 # Background of f
 arcade.draw_lrtb_rectangle_filled(0, 600, 600, 0, (48, 107, 255))
 # Fading night sky
-arcade.draw_ellipse_filled((300), (400), (1000), (500), (0, 43, 186), (0), (-1))
-arcade.draw_ellipse_filled((300), (500), (1000), (500), (0, 57, 148), (0), (-1))
-arcade.draw_ellipse_filled((300), (600), (1000), (500), (0, 40, 105), (0), (-1))
-arcade.draw_ellipse_filled((300), (700), (1000), (500), (0, 27, 71), (0), (-1))
+arcade.draw_ellipse_filled(300, 400, 1000, 500, (0, 43, 186), 0, -1)
+arcade.draw_ellipse_filled(300, 500, 1000, 500, (0, 57, 148), 0, -1)
+arcade.draw_ellipse_filled(300, 600, 1000, 500, (0, 40, 105), 0, -1)
+arcade.draw_ellipse_filled(300, 700, 1000, 500, (0, 27, 71), 0, -1)
 
 
 # Stars in blue third
