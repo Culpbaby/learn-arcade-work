@@ -3,18 +3,18 @@ import arcade
 
 def draw_skyline():
     """Draw the skyline"""
-    arcade.draw_ellipse_filled((300), (400), (1000), (500), (0, 43, 186), (0), (-1))
-    arcade.draw_ellipse_filled((300), (500), (1000), (500), (0, 57, 148), (0), (-1))
-    arcade.draw_ellipse_filled((300), (600), (1000), (500), (0, 40, 105), (0), (-1))
-    arcade.draw_ellipse_filled((300), (700), (1000), (500), (0, 27, 71), (0), (-1))
+    arcade.draw_ellipse_filled(300, 400, 1000, 500, (0, 43, 186), 0, -1)
+    arcade.draw_ellipse_filled(300, 500, 1000, 500, (0, 57, 148), 0, -1)
+    arcade.draw_ellipse_filled(300, 600, 1000, 500, (0, 40, 105), 0, -1)
+    arcade.draw_ellipse_filled(300, 700, 1000, 500, (0, 27, 71), 0, -1)
 
 def draw_cloud(x, y):
     """Draw a cloud"""
     arcade.draw_rectangle_filled(290+ x, 240 + y, 60, 60, (255, 255, 255))
-    arcade.draw_arc_filled(290+ x, 250 + y, 68, 78, arcade.color.WHITE, 0, 180)
-    arcade.draw_arc_filled(300+ x, 240 + y, 90, 60, arcade.color.WHITE, -90, 90)
-    arcade.draw_arc_filled(290+ x, 230 + y, 68, 78, arcade.color.WHITE, -180, 0)
-    arcade.draw_arc_filled(280+ x, 240 + y, 90, 60, arcade.color.WHITE, 90, 270)
+    arcade.draw_arc_filled(290 + x, 250 + y, 68, 78, arcade.color.WHITE, 0, 180)
+    arcade.draw_arc_filled(300 + x, 240 + y, 90, 60, arcade.color.WHITE, -90, 90)
+    arcade.draw_arc_filled(290 + x, 230 + y, 68, 78, arcade.color.WHITE, -180, 0)
+    arcade.draw_arc_filled(280 + x, 240 + y, 90, 60, arcade.color.WHITE, 90, 270)
 
 def draw_moon():
     """draw a moon"""

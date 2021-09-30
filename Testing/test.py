@@ -1,11 +1,8 @@
-def add_three_numbers(x, y, z):
-    average_three = (x + y + z) / 3
-    result = (average_three)
-    return (result)
+import random
 
-
-
-
-my_result = add_three_numbers(10, 20, 30)
-print(my_result)
-
+for i in range(20):
+    my_number = random.randrange(5)
+    if my_number == 0:
+        print("Dragon!")
+    else:
+        print("No dragon.")
