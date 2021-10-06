@@ -1,8 +1,24 @@
-import random
+x = [3, 8, 7, 0, 5, 5, 2, 1]
+print(x)
 
-for i in range(20):
-    my_number = random.randrange(5)
-    if my_number == 0:
-        print("Dragon!")
-    else:
-        print("No dragon.")
+# replace number in that index
+
+x[2] = 22
+print(x)
+
+# length finder
+x = [3, 7, 3]
+size = len(x)
+print(size)
+
+# print out the list vertically
+my_list = ["Knife", "Spoon", "Fork"]
+
+for item in my_list:
+    print(item)
+
+for index, value in enumerate(my_list):
+    print("Item", index, "is", value)
+
+
+

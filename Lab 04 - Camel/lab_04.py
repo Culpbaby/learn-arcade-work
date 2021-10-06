@@ -16,7 +16,7 @@ def main():
     print("You have stolen a Skybison to make your way to Bai Sing Se.")
     print("The Air-nation wants their Skybison back and are chasing you down! Survive your")
     print("desert trek and out run the Air-nation.")
-    print(" ")
+    print()
 
     done = False
 
@@ -27,18 +27,18 @@ def main():
         print("D. Stop for the night.")
         print("E. Status check.")
         print("Q. Quit.")
-        print("     ")
+        print()
 
-# If quitting
+        # If quitting
 
         choice = input("What is your choice? ")
         if choice.lower() == "q":
-            print("   ")
+            print()
             print("You have quit and the Air-nation have taken you prisoner.")
             done = True
-    #status check
+        # Status check
         elif choice.lower() == "e":
-            print("   ")
+            print()
             print("Miles traveled:", end=" ")
             print(miles_traveled)
             print("Drinks left in pouch:", end=" ")
@@ -46,98 +46,102 @@ def main():
             print("The Air-nation is:", end=" ")
             print(miles_traveled - airnation_natives_distance_traveled, end=" ")
             print("miles behind you!")
-            print("  ")
+            print()
 
-        #Stopping for the night
+        # Stopping for the night
         elif choice.lower() == "d":
             skybison_tiredness = 0
-            print(" ")
+            print()
             print("Your skybison is very happy")
             airnation_natives_distance_traveled += random.randrange(9, 22)
             print("The Air-nation is", end=" ")
             print(miles_traveled - airnation_natives_distance_traveled, end=" ")
             print("miles behind you!")
-            print("  ")
+            print()
 
-        #Ahead full speed.
+        # Ahead full speed.
         elif choice.lower() == "c":
             miles_traveled += random.randrange(13, 27)
             thirst += 1
-            skybison_tiredness += random.randrange(1,3)
+            skybison_tiredness += random.randrange(1, 3)
             airnation_natives_distance_traveled += random.randrange(7, 15)
-            print(" ")
+            print()
             print("You have traveled", end=" ")
             print(miles_traveled, end=" ")
             print("miles")
-            print(" ")
+            print()
             if random.randrange(0, 21) == 13:
-                    print(" ")
-                    print("You have found an Oasis!")
-                    print(" ")
-                    drinks_in_pouch = 4
-                    thirst = 0
-                    skybison_tiredness = 0
+                print()
+                print("You have found an Oasis!")
+                print()
+                drinks_in_pouch = 4
+                thirst = 0
+                skybison_tiredness = 0
 
 
-        #Ahead moderate speed.
+        # Ahead moderate speed.
         elif choice.lower() == "b":
             miles_traveled += random.randrange(5, 13)
             thirst += 1
             skybison_tiredness += 1
             airnation_natives_distance_traveled += random.randrange(7, 15)
-            print(" ")
+            print()
             print("You have traveled", end=" ")
             print(miles_traveled, end=" ")
             print("miles")
-            print(" ")
+            print()
             if random.randrange(0, 21) == 13:
-                print(" ")
+                print()
                 print("You have found an Oasis!")
-                print(" ")
+                print()
                 drinks_in_pouch = 4
                 thirst = 0
                 skybison_tiredness = 0
-# drink from pouch
+        # Drink from pouch
         elif choice.lower() == "a":
             drinks_in_pouch -= 1
             thirst = 0
             airnation_natives_distance_traveled += random.randrange(2, 5)
-            print(" ")
+            print()
             print("Drinks left in your pouch,", end=" ")
             print(drinks_in_pouch, ".")
-            print(" ")
-        if thirst > 4:
-            print(" ")
-            print("You are thirsty")
-            print(" ")
-        elif thirst > 6:
-            print(" ")
+            print()
+        if thirst > 6:
+            print()
             print("You died of thirst!")
-            print(" ")
+            print()
             done = True
-        if skybison_tiredness > 4:
-            print(" ")
-            print("Your Skybison is getting tired.")
-            print(" ")
-        elif skybison_tiredness > 7:
-            print(" ")
+        elif thirst > 4:
+            print()
+            print("You are thirsty")
+            print()
+        # If skybison is tired
+        if skybison_tiredness > 7:
+            print()
             print("Your Skybison is dead.")
-            print(" ")
+            print()
             done = True
+        elif skybison_tiredness > 4:
+            print()
+            print("Your Skybison is getting tired.")
+            print()
+
         if airnation_natives_distance_traveled >= miles_traveled:
-            print(" ")
+            print()
             print("The Air-nation natives have caught you.")
             print("The game is over.")
-            print(" ")
+            print()
             done = True
         elif airnation_natives_distance_traveled >= (miles_traveled - 15):
-            print(" ")
+            print()
             print("The Air-nation natives are getting close!")
-            print(" ")
+            print()
+
         if miles_traveled >= 200:
-            print(" ")
+            print()
             print("You have made it to Ba Sing Se, and have won the game!")
-            print(" ")
+            print()
             done = True
+
 
 main()
