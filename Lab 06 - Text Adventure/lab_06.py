@@ -88,6 +88,10 @@ door to the west.""", north = None, east = None, south = 4, west = 2)
             else:
                 current_room = next_room
 
+        elif choice.lower() == "q" or choice.lower() == "quit":
+            print("You have quit the game. Goodbye.")
+            done = True
+
         else:
             print("What? That wasn't on option. Please try something else.")
 
