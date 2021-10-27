@@ -8,3 +8,11 @@ for item in my_list:
         biggest_number = item
 
 print(biggest_number)
+
+
+def get_smallest(x):
+    odds = []
+    for i in x:
+        if i < 2 != 0:
+            odds.append(i)
+    return min(odds)
