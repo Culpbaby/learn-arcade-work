@@ -113,7 +113,7 @@ class MyGame(arcade.Window):
         self.physics_engine.update()
 
         # Scroll the screen to the player
-        self.scroll_to_player()
+
 
         # Scroll the window to the player.
         #
@@ -121,6 +121,7 @@ class MyGame(arcade.Window):
         # Anything between 0 and 1 will have the camera move to the location with a smoother
         # pan.
         CAMERA_SPEED = 1
+
         lower_left_corner = (self.player_sprite.center_x - self.width / 2,
                              self.player_sprite.center_y - self.height / 2)
 

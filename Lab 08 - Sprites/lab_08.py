@@ -164,8 +164,6 @@ class MyGame(arcade.Window):
             gameover = f"GAME OVER."
             arcade.draw_text(gameover, 300, 300, arcade.color.YELLOW, 25)
 
-
-
     def on_mouse_motion(self, x, y, dx, dy):
         """ Handle Mouse Motion """
 
@@ -173,7 +171,6 @@ class MyGame(arcade.Window):
         if len(self.mouse_list) > 0:
             self.zombie_sprite.center_x = x
             self.zombie_sprite.center_y = y
-
 
     def update(self, delta_time):
         """ Movement & game logic """
