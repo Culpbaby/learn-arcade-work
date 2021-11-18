@@ -80,12 +80,38 @@ class MyGame(arcade.Window):
         # Make sure we are on-grid. It is possible to click in the upper right
         # corner in the margin and go to a grid location that doesn't exist
         if row < ROW_COUNT and column < COLUMN_COUNT:
-
             # Flip the location between 1 and 0.
             if self.grid[row][column] == 0:
                 self.grid[row][column] = 1
             else:
                 self.grid[row][column] = 0
+
+        # Total cell count.
+        cells = 0
+        for row in range(ROW_COUNT):
+            for column in range(COLUMN_COUNT):
+                if self.grid[row][column] == 1:
+                    cells += 1
+        print("Total of", cells, "cells are selected")
+
+        for row in range(ROW_COUNT):
+            cell_count = 0
+            continuous_count = 0
+            for column in range(COLUMN_COUNT):
+                if self.grid[row][column] == 1:
+                    cell_count += 1
+                    continuous_count += 1
+                else:
+                    if continuous_count > 2:
+                        print("There are", continuous_count, "continuous blocks selected on row", row,".")
+                        continuous_count = 0
+            print("Row", row, "has", cell_count, "cells selected.")
+        for column in range(COLUMN_COUNT):
+            cell_count = 0
+            for row in range(ROW_COUNT):
+                if self.grid[row][column] == 1:
+                    cell_count += 1
+            print("Column", column, "has", cell_count, "cells selected.")
 
 def main():
 
