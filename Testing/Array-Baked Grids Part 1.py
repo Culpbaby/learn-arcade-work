@@ -4,6 +4,8 @@ Array Backed Grid
 Show how to use a two-dimensional list/array to back the display of a
 grid on-screen.
 """
+import random
+
 import arcade
 
 # Set how many rows and columns we will have
@@ -22,12 +24,10 @@ MARGIN = 5
 SCREEN_WIDTH = (WIDTH + MARGIN) * COLUMN_COUNT + MARGIN
 SCREEN_HEIGHT = (HEIGHT + MARGIN) * ROW_COUNT + MARGIN
 
-
 class MyGame(arcade.Window):
     """
     Main application class.
     """
-
     def __init__(self, width, height):
         """
         Set up the application.
@@ -49,7 +49,6 @@ class MyGame(arcade.Window):
         """
         Render the screen.
         """
-
         # This command has to happen before we start drawing
         arcade.start_render()
 
@@ -58,9 +57,9 @@ class MyGame(arcade.Window):
             for column in range(COLUMN_COUNT):
                 # Figure out what color to draw the box
                 if self.grid[row][column] == 1:
-                    color = arcade.color.GREEN
+                    color = (random.randrange(256), random.randrange(256), random.randrange(256))
                 else:
-                    color = arcade.color.WHITE
+                    color = (247, 0, 255)
 
                 # Do the math to figure out where the box is
                 x = (MARGIN + WIDTH) * column + MARGIN + WIDTH // 2
@@ -73,7 +72,6 @@ class MyGame(arcade.Window):
         """
         Called when the user presses a mouse button.
         """
-
         # Change the x/y screen coordinates to grid coordinates
         column = x // (WIDTH + MARGIN)
         row = y // (HEIGHT + MARGIN)
@@ -90,12 +88,10 @@ class MyGame(arcade.Window):
             else:
                 self.grid[row][column] = 0
 
-
 def main():
 
     window = MyGame(SCREEN_WIDTH, SCREEN_HEIGHT)
     arcade.run()
-
 
 if __name__ == "__main__":
     main()
