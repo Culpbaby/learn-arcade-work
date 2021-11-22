@@ -101,10 +101,11 @@ class MyGame(arcade.Window):
                 if self.grid[row][column] == 1:
                     cell_count += 1
                     continuous_count += 1
-                else:
-                    if continuous_count > 2:
-                        print("There are", continuous_count, "continuous blocks selected on row", row,".")
-                        continuous_count = 0
+                elif continuous_count > 2:
+                    print("There are", continuous_count, "continuous blocks selected on row", row,".")
+                    continuous_count = 0
+            if continuous_count > 2:
+                print("There are", continuous_count, "continuous blocks selected on row", row, ".")
             print("Row", row, "has", cell_count, "cells selected.")
         for column in range(COLUMN_COUNT):
             cell_count = 0
