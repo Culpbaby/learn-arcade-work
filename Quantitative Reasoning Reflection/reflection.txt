@@ -1,0 +1,31 @@
+               Quantitative Reasoning Reflection
+                        Levi Culp
+                        12/1/2021
+
+                        Question #1
+When I decided to use the "If" statements it was because I needed some certain code
+to run based on a certain condition such as if the user chose a certain option out of four choices.
+This function is very useful for games that involve making choices throughout the game.
+Now for, 'for' loops I used them when I wanted some certain code to be run a certain number of times,
+or to be run until a certain condition occurs such as winning the game or a game over occurs.
+A classic game for function to be used would be 20 questions. Keep asking questions and questions
+and guessing whatever it may be and stops running when it has been guessed or the number of
+questions has reached its limit of 20 questions.
+
+
+                        Question #2
+
+                        Question #3
+By running the code and testing the code my self during the process of making the code.
+There is a long cycle of testing the code I have made to see if it does what I expect.
+If the code was not working right the first thing I always check is if the code is all spelled correctly
+especially when the code is calling another function. After checking if things were spelled correctly
+I would then look to make sure everything was indented correctly based off of the examples
+we were given to create our code. If I still could not find the problem, I would
+begin a trial and error of small details such as where stuff was indented.
+
+                        Question #4
+Algorithms are stuck operating based on their code, and they can not make adjustments or
+free choices outside their code. We can't just evaluate students based on tests scores because
+some students may be horrible test takers or good at guessing and others students might be horrible
+at those.
