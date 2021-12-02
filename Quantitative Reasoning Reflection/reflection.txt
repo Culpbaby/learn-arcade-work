@@ -1,31 +1,63 @@
-               Quantitative Reasoning Reflection
-                        Levi Culp
-                        12/1/2021
+                        Quantitative Reasoning Reflection
+                                    Levi Culp
+                                    12/1/2021
 
-                        Question #1
-When I decided to use the "If" statements it was because I needed some certain code
+                                    Question #1
+    When I decided to use the "If" statements it was because I needed some certain code
 to run based on a certain condition such as if the user chose a certain option out of four choices.
-This function is very useful for games that involve making choices throughout the game.
-Now for, 'for' loops I used them when I wanted some certain code to be run a certain number of times,
+This function is very useful for games that involve making choices throughout the game. Now for, 'for' loops
+I used them when I wanted some certain code to be run a certain number of times,
 or to be run until a certain condition occurs such as winning the game or a game over occurs.
 A classic game for function to be used would be 20 questions. Keep asking questions and questions
 and guessing whatever it may be and stops running when it has been guessed or the number of
-questions has reached its limit of 20 questions.
+questions has reached its limit of 20 questions. Other things w used were methods, one of them I used a lot were
+classes. For action-adventure games classes are a much easier way to define
+and hold information that are key parts of the game. Some examples of what the class could hold are a field,
+attribute, or an instance variable. The most common was an instance variable by creating a character to use
+or items that can be collected or that would need to be avoided by the character. For the class to work however it
+would need an Init function inside the class to run. Everytime a new Init is
+created it makes a new instance of the class as stated earlier. Any time we create a new instance of a class,
+we need code that will create our attributes (variables) and set them to default values. Any function that is in a class
+is called a method instead because it makes it easier to determine what is in a class and what isn't.
 
 
-                        Question #2
+                                    Question #2
+    When I am trying to explain my code to another programmer it has usually been when we are both working
+on the same lab or assignment which makes it easier to explain such as simply telling the other programmer
+that I am working in the set_up function or that I am working on making the character move. So usually we
+sit there together and compare our code to see if I am missing something, or it is out of place. The best thing
+about how we set up our code however was how we named the variables and functions. They were named certain things,
+so we know what they did and what they related to. Some very simple examples I have are when creating a picture with functions
+I named one function a skyline function because it contained everything that was in the skyline of the picture. A variable
+example would be making the score count variable named score_count. Sometimes the functions would still be hard to tell what
+they did, so I also used comments that didn't affect the code at all to quite literally tell me and other programmers
+what the code below is doing or at least attempting to do. Do all of this made it very easy to read and to find where
+the problem is because of the labels and comments telling us what that code was responsible for.
 
-                        Question #3
+                                    Question #3
 By running the code and testing the code my self during the process of making the code.
 There is a long cycle of testing the code I have made to see if it does what I expect.
 If the code was not working right the first thing I always check is if the code is all spelled correctly
 especially when the code is calling another function. After checking if things were spelled correctly
 I would then look to make sure everything was indented correctly based off of the examples
 we were given to create our code. If I still could not find the problem, I would
-begin a trial and error of small details such as where stuff was indented.
+begin a trial and error of small details such as where stuff was indented. After all of that if I still could
+not figure out how to fix the problem I would then narrow it down to what I think it would be and began asking for
+help from classmates or our professor. After completing some code, and I believed I was done with it, I would
+test the output of the code by changing up some inputs to make sure it was running correctly. A great example would be
+when I was trying to get a certain number in a list to print I would change the number a few times to make sure
+it was working correctly.
 
-                        Question #4
+                                    Question #4
 Algorithms are stuck operating based on their code, and they can not make adjustments or
 free choices outside their code. We can't just evaluate students based on tests scores because
-some students may be horrible test takers or good at guessing and others students might be horrible
-at those.
+some students may be horrible test takers or good at guessing and others students might be horrible at guessing.
+There also wouldn't be much actual learning or much joy in life because mistakes and failing at something are
+what makes success so enjoyable and fun. Algorithms are stuck to whatever they have been designed to do and can not
+learn or grow from that without our intervention. We also can't only evaluate teachers on how their students perform
+because some students make lack the will to want to learn or to simply even attempt to learn the subject material at hand.
+Now putting this into a sports perspective, we can't judge an athlete on their stats because there are many players on teams
+that impact a game without it being marked on a stat sheet. A very commonly known example of this is how an offensive lineman
+in an american football game could play a perfect game and not miss a single block, but their blocks don't go on the stat sheet.
+Only their mistakes or "pancake" blocks get recorded. The fact is that to truly evaluate something you have to look at it
+in different perspectives.
