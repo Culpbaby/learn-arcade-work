@@ -4,6 +4,7 @@ Survive the Slurm monsters and teleport out of there factory.
 """
 import random
 import arcade
+import time
 
 TILE_SCALING = 0.9
 GRID_PIXEL_SIZE = 128
@@ -29,6 +30,9 @@ SUPER_JUMP_SPEED = 22
 SPRITE_SCALING_SLIME = 0.5
 purple_count = 15
 green_count = 15
+
+# Player health.
+PLAYER_HEALTH = 100
 
 class Purple(arcade.Sprite):
     def __init__(self,filename, scale):
@@ -73,7 +77,6 @@ class Green(arcade.Sprite):
         if self.center_y < 200:
             self.center_x = random.randrange(0, 1750)
             self.center_y = random.randrange(300, 1750)
-
 
 class Boss(arcade.Sprite):
     def __init__(self,filename, scale):
@@ -127,6 +130,7 @@ class MyGame(arcade.Window):
 
         # Physics engine so we don't run into walls.
         self.physics_engine = None
+        self.EXIT = 0
 
         # Track the current state o what key is pressed
         self.left_pressed = False
@@ -158,15 +162,13 @@ class MyGame(arcade.Window):
         self.super_jump_list = arcade.SpriteList()
         self.exit_list = arcade.SpriteList()
 
-        # Score
-
         # Set up the player
         self.player_sprite = arcade.Sprite("robot_idle.png",
                                            scale=0.45)
-        self.player_sprite.center_x = 1390
-        self.player_sprite.center_y = 1812
+        self.player_sprite.center_x = 390
+        self.player_sprite.center_y = 212
         self.player_list.append(self.player_sprite)
-
+        self.player_sprite.health = PLAYER_HEALTH
         # Set up the super jump.
         self.super_jump_sprite = arcade.Sprite("switchGreen.png", scale=0.63)
         self.super_jump_sprite.center_x = 1550
@@ -254,7 +256,6 @@ class MyGame(arcade.Window):
                 self.green.center_x = random.randrange(0, 1750)
                 self.green.center_y = random.randrange(300, 1750)
 
-
                 # If it is hitting a wall.
                 # See if the key is hitting a wall.
                 wall_hit_list = arcade.check_for_collision_with_list(self.green, self.wall_list)
@@ -273,7 +274,64 @@ class MyGame(arcade.Window):
 
                 self.green.physics_engine = arcade.PhysicsEnginePlatformer(self.green, self.wall_list,
                                                                      gravity_constant=GRAVITY)
+    def on_update(self, delta_time):
+        """ Movement and game logic """
 
+        # Calculate speed based on the keys pressed
+
+        if self.left_pressed and not self.right_pressed:
+            self.player_sprite.change_x = -PLAYER_MOVEMENT_SPEED
+        elif self.right_pressed and not self.left_pressed:
+            self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
+        if self.player_sprite.health < 100:
+            self.player_sprite.health += 0.002
+
+            # Call update on all sprites (The sprites don't do much in this
+            # example though.)
+        self.boss_sprite.update()
+        self.physics_engine.update()
+        self.boss_sprite.physics_engine.update()
+        for purple in self.purple_list:
+            purple.physics_engine.update()
+            purple.update()
+
+        for green in self.green_list:
+            green.physics_engine.update()
+            green.update()
+
+        # Purple enemies when hitting robot.
+        purple_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.purple_list)
+
+        for self.purple in purple_hit_list:
+            self.player_sprite.health -= random.randrange(1, 3)
+
+        # Green enemies when hitting robot.
+        green_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.green_list)
+
+        for self.green in green_hit_list:
+            self.player_sprite.change_y = JUMP_SPEED * 0.6
+            self.player_sprite.change_x = self.player_sprite.change_x + self.boss_sprite.change_x
+
+        jump_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.super_jump_list)
+
+        for self.super_jump_sprite in jump_hit_list:
+            self.player_sprite.change_y = SUPER_JUMP_SPEED
+
+        switch_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.switch_list)
+        # Exit sign.
+        for self.switch_sprite in switch_hit_list:
+            self.switch_sprite.remove_from_sprite_lists()
+            self.EXIT += 1
+
+        boss_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.boss_list)
+
+        # Boss damaging player.
+        for self.boss_sprite in boss_hit_list:
+            self.player_sprite.change_y = JUMP_SPEED*1.3
+            self.player_sprite.change_x = self.player_sprite.change_x + self.boss_sprite.change_x * 2
+            self.player_sprite.health -= random.randrange(5, 20)
+        # Scroll the screen to the player
+        self.scroll_to_player()
 
     def on_draw(self):
         """ Render the screen."""
@@ -294,20 +352,48 @@ class MyGame(arcade.Window):
         self.super_jump_list.draw()
         self.exit_list.draw()
 
-
-
         # Select the (unscrolled) camera for our GUI
         self.camera_gui.use()
 
-        # Draw the GUI
-        arcade.draw_rectangle_filled(self.width // 2,
-                                     20,
-                                     self.width,
-                                     40,
-                                     arcade.color.ALMOND)
-        text = f"Scroll value: ({self.camera_sprites.position[0]:5.1f}, " \
-               f"{self.camera_sprites.position[1]:5.1f})"
-        arcade.draw_text(text, 10, 10, arcade.color.BLACK_BEAN, 20)
+        # Draw health.
+        health = f"Robot battery percentage: ({self.player_sprite.health})"
+        arcade.draw_text(health, 400, 10, arcade.color.BLACK, 20)
+
+        # Exit sign
+        if self.EXIT > 0:
+            find_exit = f"You need to find the exit fast!"
+            find_exit2 = f"Then you'll win the game!!"
+            arcade.draw_text(find_exit, 200, 400, arcade.color.YELLOW, 25)
+            arcade.draw_text(find_exit2, 200, 350, arcade.color.YELLOW, 25)
+            self.exit_list.draw()
+            exit_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.exit_list)
+            game_over = 0
+
+            for self.exit_sprite in exit_hit_list:
+                game_over += 1
+
+            frame = 0
+            timer = 0
+            if game_over > 0:
+                gameover = f"You won the game."
+                arcade.draw_text(gameover, 400, 400, arcade.color.BLUE_SAPPHIRE, 25)
+                timer += 1
+
+                time.sleep(3)
+            if timer == 1:
+                frame += 2
+            if frame > 2:
+                exit()
+
+        if self.player_sprite.health <= 0:
+            gameover = f"GAME OVER."
+            frame = 0
+            timer = 0
+            arcade.draw_text(gameover, 400, 400, arcade.color.BLUE_SAPPHIRE, 25)
+            if timer == 1:
+                frame += 2
+            if frame > 2:
+                exit()
 
     def on_key_press(self, key, modifiers):
         """
@@ -321,50 +407,16 @@ class MyGame(arcade.Window):
         elif key == arcade.key.RIGHT:
             self.right_pressed = True
 
+
     def on_key_release(self, key, modifiers):
         """Called when the user releases a key. """
 
         if key == arcade.key.LEFT:
             self.left_pressed = False
+            self.player_sprite.change_x = 0
         elif key == arcade.key.RIGHT:
             self.right_pressed = False
-
-    def on_update(self, delta_time):
-        """ Movement and game logic """
-
-        # Calculate speed based on the keys pressed
-        self.player_sprite.change_x = 0
-
-        if self.left_pressed and not self.right_pressed:
-            self.player_sprite.change_x = -PLAYER_MOVEMENT_SPEED
-        elif self.right_pressed and not self.left_pressed:
-            self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
-
-            # Call update on all sprites (The sprites don't do much in this
-            # example though.)
-        self.boss_sprite.update()
-        self.physics_engine.update()
-        self.boss_sprite.physics_engine.update()
-        for purple in self.purple_list:
-            purple.physics_engine.update()
-            purple.update()
-
-        for green in self.green_list:
-            green.physics_engine.update()
-            green.update()
-
-        jump_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.super_jump_list)
-
-        for self.super_jump_sprite in jump_hit_list:
-            self.player_sprite.change_y = SUPER_JUMP_SPEED
-
-        switch_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.switch_list)
-
-        for self.switch_sprite in switch_hit_list:
-            self.switch_sprite.remove_from_sprite_lists()
-
-        # Scroll the screen to the player
-        self.scroll_to_player()
+            self.player_sprite.change_x = 0
 
     def scroll_to_player(self):
         """
@@ -386,7 +438,6 @@ class MyGame(arcade.Window):
         """
         self.camera_sprites.resize(int(width), int(height))
         self.camera_gui.resize(int(width), int(height))
-
 
 def main():
     """ Main function """

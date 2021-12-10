@@ -25,7 +25,7 @@ PLAYER_MOVEMENT_SPEED = 11
 
 # Number of keys.
 SPRITE_SCALING_KEY = 0.5
-KEY_COUNT = 50
+KEY_COUNT = 2
 
 class MyGame(arcade.Window):
     """ Main application class. """
