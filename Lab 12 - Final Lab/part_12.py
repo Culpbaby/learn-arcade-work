@@ -143,6 +143,12 @@ class MyGame(arcade.Window):
         # Store our tile map.
         self.tile_map = None
 
+        # Sound creation.
+        self.key_sound = arcade.load_sound("arcade_resources_sounds_jump4.wav")
+        self.key_sound2 = arcade.load_sound("arcade_resources_sounds_lose1.wav")
+        self.key_sound3 = arcade.load_sound("arcade_resources_sounds_error4.wav")
+        self.key_sound4 = arcade.load_sound("arcade_resources_sounds_hurt3.wav")
+
         # Create the cameras. One for the GUI, one for the sprites.
         # We scroll the 'sprite world' but not the GUI.
         self.camera_sprites = arcade.Camera(DEFAULT_SCREEN_WIDTH, DEFAULT_SCREEN_HEIGHT)
@@ -166,7 +172,7 @@ class MyGame(arcade.Window):
         self.player_sprite = arcade.Sprite("robot_idle.png",
                                            scale=0.45)
         self.player_sprite.center_x = 390
-        self.player_sprite.center_y = 212
+        self.player_sprite.center_y = 112
         self.player_list.append(self.player_sprite)
         self.player_sprite.health = PLAYER_HEALTH
         # Set up the super jump.
@@ -284,7 +290,7 @@ class MyGame(arcade.Window):
         elif self.right_pressed and not self.left_pressed:
             self.player_sprite.change_x = PLAYER_MOVEMENT_SPEED
         if self.player_sprite.health < 100:
-            self.player_sprite.health += 0.002
+            self.player_sprite.health += 0.004
 
             # Call update on all sprites (The sprites don't do much in this
             # example though.)
@@ -303,7 +309,8 @@ class MyGame(arcade.Window):
         purple_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.purple_list)
 
         for self.purple in purple_hit_list:
-            self.player_sprite.health -= random.randrange(1, 3)
+            self.player_sprite.health -= random.randrange(1, 2)
+            arcade.play_sound(self.key_sound)
 
         # Green enemies when hitting robot.
         green_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.green_list)
@@ -311,11 +318,13 @@ class MyGame(arcade.Window):
         for self.green in green_hit_list:
             self.player_sprite.change_y = JUMP_SPEED * 0.6
             self.player_sprite.change_x = self.player_sprite.change_x + self.boss_sprite.change_x
+            arcade.play_sound(self.key_sound3)
 
         jump_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.super_jump_list)
 
         for self.super_jump_sprite in jump_hit_list:
             self.player_sprite.change_y = SUPER_JUMP_SPEED
+            arcade.play_sound(self.key_sound4)
 
         switch_hit_list = arcade.check_for_collision_with_list(self.player_sprite, self.switch_list)
         # Exit sign.
@@ -330,6 +339,7 @@ class MyGame(arcade.Window):
             self.player_sprite.change_y = JUMP_SPEED*1.3
             self.player_sprite.change_x = self.player_sprite.change_x + self.boss_sprite.change_x * 2
             self.player_sprite.health -= random.randrange(5, 20)
+            arcade.play_sound(self.key_sound2)
         # Scroll the screen to the player
         self.scroll_to_player()
 
@@ -359,6 +369,20 @@ class MyGame(arcade.Window):
         health = f"Robot battery percentage: ({self.player_sprite.health})"
         arcade.draw_text(health, 400, 10, arcade.color.BLACK, 20)
 
+        # Game explanation.
+        if self.player_sprite.center_y < 300 and self.player_sprite.center_x < 600:
+            game_define = f"You, Bender, need to escape this dungeon before the"
+            game_define2 = f"Slurm get to you! The pink slurm will take your battery"
+            game_define3 = f"and the green slurm will limit your jumping ability."
+            game_define4 = f"The green boss at the top will knock you around"
+            game_define5 = f"and take your battery percentage down considerably."
+
+            arcade.draw_text(game_define, 70, 400, arcade.color.BLACK, 20)
+            arcade.draw_text(game_define2, 70, 350, arcade.color.BLACK, 20)
+            arcade.draw_text(game_define3, 70, 300, arcade.color.BLACK, 20)
+            arcade.draw_text(game_define4, 70, 250, arcade.color.BLACK, 20)
+            arcade.draw_text(game_define5, 70, 200, arcade.color.BLACK, 20)
+
         # Exit sign
         if self.EXIT > 0:
             find_exit = f"You need to find the exit fast!"
@@ -376,7 +400,7 @@ class MyGame(arcade.Window):
             timer = 0
             if game_over > 0:
                 gameover = f"You won the game."
-                arcade.draw_text(gameover, 400, 400, arcade.color.BLUE_SAPPHIRE, 25)
+                arcade.draw_text(gameover, 300, 300, arcade.color.RED, 25)
                 timer += 1
 
                 time.sleep(3)
